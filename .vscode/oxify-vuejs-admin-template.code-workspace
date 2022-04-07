@@ -1,0 +1,74 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		// JS
+		"javascript.updateImportsOnFileMove.enabled": "always",
+		// JSON
+		"[json]": {
+			"editor.defaultFormatter": "vscode.json-language-features"
+		},
+		"[jsonc]": {
+			"editor.defaultFormatter": "vscode.json-language-features"
+		},
+		// Extension: Emmet
+		"emmet.includeLanguages": {
+			"markdown": "html"
+		},
+		// Extension: Git
+		"git.rebaseWhenSync": true,
+		// Extension: Prettier
+		"prettier.requireConfig": true,
+		"[html]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[javascript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[typescript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[markdown]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[scss]": {
+			"editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+		},
+		// Extension: Vetur
+		"vetur.experimental.templateInterpolationService": false,
+		"vetur.validation.template": false,
+		"vetur.format.defaultFormatter.html": "none",
+		"[vue]": {
+			"editor.defaultFormatter": "octref.vetur",
+		},
+		// Extension: ESLint
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true,
+			"source.organizeImports": true,
+		},
+		"eslint.validate": [
+			"vue",
+			"html",
+			"javascript",
+			"typescript",
+			"javascriptreact",
+			"typescriptreact"
+		],
+		"eslint.alwaysShowStatus": true,
+		"eslint.format.enable": true,
+		"eslint.packageManager": "yarn",
+		// Extension: SCSS Formatter
+		"scssFormatter.singleQuote": true,
+		// Extension: cSpell
+		"cSpell.words": [
+			"Appbar",
+			"Customizer",
+			"Vetur",
+			"Vuetify",
+			"vuex"
+		],
+	},
+}

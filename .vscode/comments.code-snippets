@@ -1,0 +1,33 @@
+{
+  "Comment: Heading": {
+    "prefix": "cm-heading",
+    "body": [
+      "// ————————————————————————————————————",
+      "//* ——— ${1:Heading}",
+      "// ————————————————————————————————————",
+      "",
+      "",
+    ],
+    "description": "Comment: Heading"
+  },
+  "Comment: SubHeading": {
+    "prefix": "cm-subheading",
+    "body": [
+      "//",
+      "//* ——— ${1:Subheading} ——————————————————",
+      "//",
+      "",
+      "",
+    ],
+    "description": "Comment: SubHeading"
+  },
+  "Comment: Label": {
+    "prefix": "cm-label",
+    "body": [
+      "// ——— ${1:Label} ——————— //",
+      "",
+      "",
+    ],
+    "description": "Comment: Label"
+  }
+}

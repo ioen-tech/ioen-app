@@ -1,0 +1,40 @@
+<template>
+  <div class="demo-space-x">
+    <v-btn
+      rounded
+      color="primary"
+    >
+      Primary
+    </v-btn>
+    <v-btn
+      rounded
+      color="secondary"
+    >
+      Secondary
+    </v-btn>
+    <v-btn
+      rounded
+      color="success"
+    >
+      Success
+    </v-btn>
+    <v-btn
+      rounded
+      color="info"
+    >
+      Info
+    </v-btn>
+    <v-btn
+      rounded
+      color="warning"
+    >
+      Warning
+    </v-btn>
+    <v-btn
+      rounded
+      color="error"
+    >
+      Error
+    </v-btn>
+  </div>
+</template>

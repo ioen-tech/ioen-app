@@ -1,0 +1,32 @@
+{
+    "Import Vuetify Global SASS variables": {
+        "prefix": "i-vuetify-global-sass-variables",
+        "body": [
+            "@import '~vuetify/src/styles/styles.sass';"
+        ],
+        "description": "Import Vuetify Global SASS variables"
+    },
+    "Import Vuetify Component SASS variables": {
+        "prefix": "i-vuetify-component-sass-variables",
+        "body": [
+            "@import '~vuetify/src/components/V${1:ComponentName}/_variables.scss';;"
+        ],
+        "description": "Import Vuetify Component SASS variables"
+    },
+    "Vuetify - Use theme Mixin": {
+        "prefix": "inc-theme",
+        "body": [
+            "@include theme(${1:component/class}) using (\\$material) {",
+            "  ${2:selector}",
+            "}"
+        ],
+        "description": "Vuetify - Use theme Mixin"
+    },
+    "SCSS: Map Deep Get": {
+        "prefix": "map-deep-get-from-material",
+        "body": [
+            "map-deep-get(\\$material, ${1})"
+        ],
+        "description": "SCSS: Map Deep Get"
+    }
+}

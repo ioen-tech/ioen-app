@@ -1,0 +1,40 @@
+<template>
+  <div class="demo-space-x">
+    <v-btn
+      outlined
+      color="primary"
+    >
+      Primary
+    </v-btn>
+    <v-btn
+      outlined
+      color="secondary"
+    >
+      Secondary
+    </v-btn>
+    <v-btn
+      outlined
+      color="success"
+    >
+      Success
+    </v-btn>
+    <v-btn
+      outlined
+      color="info"
+    >
+      Info
+    </v-btn>
+    <v-btn
+      outlined
+      color="warning"
+    >
+      Warning
+    </v-btn>
+    <v-btn
+      outlined
+      color="error"
+    >
+      Error
+    </v-btn>
+  </div>
+</template>

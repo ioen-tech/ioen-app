@@ -1,0 +1,9 @@
+{
+    "Template interpolation": {
+        "prefix": "cc",
+        "body": [
+            "{{ ${1} }}"
+        ],
+        "description": "Template interpolation"
+    }
+}

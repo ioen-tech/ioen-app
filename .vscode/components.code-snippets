@@ -1,0 +1,51 @@
+{
+    "VAvatar w/ Image": {
+        "prefix": "avatar-w-img",
+        "body": [
+            "<v-avatar>",
+            "  <v-img src=\"/images/avatars/1.png\"></v-img>",
+            "</v-avatar>"
+        ],
+        "description": "VAvatar w/ Image"
+    },
+    "VIcon": {
+        "prefix": "v-icon",
+        "body": [
+            "<v-icon>{{ icons.mdi${1} }}</v-icon>"
+        ],
+        "description": "VIcon"
+    },
+    "Icon Only Button": {
+        "prefix": "btn-icon",
+        "body": [
+            "<v-btn icon small>",
+            "  <v-icon>{{ icons.${1:mdi} }}</v-icon>",
+            "</v-btn>"
+        ],
+        "description": "Icon Only Button"
+    },
+    "Icon Button Menu": {
+        "prefix": "menu-btn-icon",
+        "body": [
+            "<v-menu offset-y>",
+            "  <template #activator=\"{ on, attrs }\">",
+            "    <v-btn",
+            "      icon",
+            "      small",
+            "      v-bind=\"attrs\"",
+            "      v-on=\"on\"",
+            "    >",
+            "      <v-icon>{{ icons.${1} }}</v-icon>",
+            "    </v-btn>",
+            "  </template>",
+            "",
+            "  <v-list>",
+            "    <v-list-item link>",
+            "      <v-list-item-title>Item</v-list-item-title>",
+            "    </v-list-item>",
+            "  </v-list>",
+            "</v-menu>"
+        ],
+        "description": "Icon Button Menu"
+    }
+}

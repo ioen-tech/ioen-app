@@ -1,0 +1,23 @@
+{
+    "Import Material Design SVG Icon(s)": {
+        "prefix": "i-mdi-svg-icon",
+        "body": [
+            "import { ${1} } from '@mdi/js'"
+        ],
+        "description": "Import Material Design SVG Icon(s)"
+    },
+    "Import User SASS variables": {
+        "prefix": "i-user-sass-variables",
+        "body": [
+            "@import '~@user-variables;"
+        ],
+        "description": "Import User SASS variables"
+    },
+    "Import from Vue composition API plugin": {
+        "prefix": "icompapi",
+        "body": [
+            "import { ${1:ref} } from '@vue/composition-api'"
+        ],
+        "description": "Import from Vue composition API plugin"
+    },
+}

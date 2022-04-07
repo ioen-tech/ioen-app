@@ -1,0 +1,31 @@
+{
+    "recommendations": [
+        "formulahendry.auto-rename-tag",
+        "octref.vetur",
+        "sdras.vue-vscode-snippets",
+        "mrmlnc.vscode-scss",
+        "syler.sass-indented",
+        "christian-kohler.npm-intellisense",
+        "xabikos.javascriptsnippets",
+        "zignd.html-css-class-completion",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "editorconfig.editorconfig",
+        "usernamehw.errorlens",
+        "formulahendry.auto-close-tag",
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+        "cipchk.cssrem",
+        "mgmcdermott.vscode-language-babel",
+        "atishay-jain.all-autocomplete",
+        "steoates.autoimport",
+        "coenraads.bracket-pair-colorizer",
+        "wmaurer.change-case",
+        "exodiusstudios.comment-anchors",
+        "ionutvmi.path-autocomplete",
+        "visualstudioexptteam.vscodeintellicode",
+        "massi.javascript-docstrings"
+    ]
+}
