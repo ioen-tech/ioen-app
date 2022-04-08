@@ -25,5 +25,4 @@ axiosIns.interceptors.request.use(
 )
 
 Vue.prototype.$http = axiosIns
-console.log(axiosIns)
 export default axiosIns

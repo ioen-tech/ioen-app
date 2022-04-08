@@ -1,37 +1,10 @@
 <template>
-  <v-menu
-    offset-y
-    left
-    nudge-bottom="14"
-    min-width="230"
-    content-class="user-profile-menu-content"
-  >
+  <v-menu v-if="userData" offset-y left nudge-bottom="14" min-width="230" content-class="user-profile-menu-content">
     <template v-slot:activator="{ on, attrs }">
-      <v-badge
-        bottom
-        color="success"
-        overlap
-        offset-x="12"
-        offset-y="12"
-        class="ms-4"
-        dot
-      >
-        <v-avatar
-          size="40px"
-          v-bind="attrs"
-          color="primary"
-          class="v-avatar-light-bg primary--text"
-          v-on="on"
-        >
-          <v-img
-            v-if="userData.avatar"
-            :src="userData.avatar"
-          ></v-img>
-          <v-icon
-            v-else
-            color="primary"
-            size="28"
-          >
+      <v-badge bottom color="success" overlap offset-x="12" offset-y="12" class="ms-4" dot>
+        <v-avatar size="40px" v-bind="attrs" color="primary" class="v-avatar-light-bg primary--text" v-on="on">
+          <v-img v-if="userData.avatar" :src="userData.avatar"></v-img>
+          <v-icon v-else color="primary" size="28">
             {{ icons.mdiAccountOutline }}
           </v-icon>
         </v-avatar>
@@ -39,37 +12,15 @@
     </template>
     <v-list>
       <div class="pb-3 pt-2">
-        <v-badge
-          bottom
-          color="success"
-          overlap
-          offset-x="12"
-          offset-y="12"
-          class="ms-4"
-          dot
-        >
-          <v-avatar
-            size="40px"
-            color="primary"
-            class="v-avatar-light-bg primary--text"
-          >
-            <v-img
-              v-if="userData.avatar"
-              src="@/assets/images/avatars/1.png"
-            ></v-img>
-            <v-icon
-              v-else
-              color="primary"
-              size="28"
-            >
+        <v-badge bottom color="success" overlap offset-x="12" offset-y="12" class="ms-4" dot>
+          <v-avatar size="40px" color="primary" class="v-avatar-light-bg primary--text">
+            <v-img v-if="userData.avatar" :src="userData.avatar"></v-img>
+            <v-icon v-else color="primary" size="28">
               {{ icons.mdiAccountOutline }}
             </v-icon>
           </v-avatar>
         </v-badge>
-        <div
-          class="d-inline-flex flex-column justify-center ms-3"
-          style="vertical-align:middle"
-        >
+        <div class="d-inline-flex flex-column justify-center ms-3" style="vertical-align: middle">
           <span class="text--primary font-weight-semibold mb-n1">
             {{ userData.fullName || userData.username }}
           </span>
@@ -115,12 +66,7 @@
         </v-list-item-content>
 
         <v-list-item-action>
-          <v-badge
-            inline
-            color="error"
-            content="2"
-          >
-          </v-badge>
+          <v-badge inline color="error" content="2"> </v-badge>
         </v-list-item-action>
       </v-list-item>
 
@@ -191,14 +137,14 @@ import {
   mdiLogoutVariant,
 } from '@mdi/js'
 import { useRouter } from '@core/utils'
-import { getCurrentInstance } from '@vue/composition-api'
+import { getCurrentInstance, computed } from '@vue/composition-api'
 import { initialAbility } from '@/plugins/acl/config'
+import store from '../../../../store'
 
 export default {
   setup() {
     const vm = getCurrentInstance().proxy
     const { router } = useRouter()
-    const userData = JSON.parse(localStorage.getItem('userData'))
 
     const logoutUser = () => {
       // Remove userData from localStorage
@@ -218,8 +164,7 @@ export default {
 
     return {
       logoutUser,
-      userData,
-
+      userData: computed(() => store.state.agentProfile),
       icons: {
         mdiAccountOutline,
         mdiEmailOutline,

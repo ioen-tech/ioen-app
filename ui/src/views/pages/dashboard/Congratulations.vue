@@ -4,7 +4,7 @@
       <v-col cols="8" sm="6">
         <v-card-title class="greeting-title d-flex flex-nowrap text-2xl">
           <span class="text-no-wrap">Congratulations</span>
-          <span class="text-no-wrap font-weight-bold mx-1">{{ userData.username }}!</span>
+          <span v-if="userData" class="text-no-wrap font-weight-bold mx-1">{{ userData.username }}!</span>
           <span>🎉</span>
         </v-card-title>
 
@@ -28,12 +28,13 @@
 </template>
 
 <script>
+import { computed } from '@vue/composition-api'
+import store from '../../../store'
+
 export default {
   setup() {
-    const userData = JSON.parse(localStorage.getItem('userData'))
-
     return {
-      userData,
+      userData: computed(() => store.state.agentProfile),
     }
   },
 }

@@ -1,6 +1,17 @@
 <template>
   <div class="auth-wrapper auth-v2">
     <div class="auth-inner">
+      <v-overlay :absolute="true" :value="overlay" :opacity="1">
+        <div class="d-flex align-center h-full pa-16 pe-0">
+          <v-img
+            contain
+            max-width="100%"
+            height="710"
+            class="auth-3d-group"
+            :src="require(`@/assets/images/misc/ioen-architecture.png`)"
+          ></v-img>
+        </div>
+      </v-overlay>
       <!-- brand logo -->
       <router-link to="/" class="brand-logo d-flex align-center">
         <v-img :src="appLogo" max-height="30px" max-width="30px" alt="logo" contain class="me-3"></v-img>
@@ -55,6 +66,18 @@
                     <v-text-field
                       v-model="username"
                       outlined
+                      dense
+                      label="Your handle"
+                      :error-messages="errorMessages.username"
+                      :rules="[validators.required]"
+                      placeholder="Your name"
+                      hide-details="auto"
+                      class="mb-6"
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="fullName"
+                      outlined
+                      dense
                       label="Your name"
                       :error-messages="errorMessages.username"
                       :rules="[validators.required]"
@@ -62,10 +85,13 @@
                       hide-details="auto"
                       class="mb-6"
                     ></v-text-field>
-
+                    <v-file-input v-model="uploadedFile" accept="image/*" label="Upload new avatar" outlined dense>
+                    </v-file-input>
+                    <v-img :src="avatar" width="100" class="mx-auto mb-2" />
                     <v-text-field
                       v-model="email"
                       outlined
+                      dense
                       :error-messages="errorMessages.email"
                       :rules="[validators.required, validators.emailValidator]"
                       label="Email"
@@ -73,10 +99,10 @@
                       hide-details="auto"
                       class="mb-6"
                     ></v-text-field>
-
                     <v-text-field
                       v-model="password"
                       outlined
+                      dense
                       :type="isPasswordVisible ? 'text' : 'password'"
                       label="Password"
                       :error-messages="errorMessages.password"
@@ -112,13 +138,14 @@
 
 <script>
 // eslint-disable-next-line object-curly-newline
-import { mdiFacebook, mdiTwitter, mdiGithub, mdiGoogle, mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js'
+import { mdiEyeOutline, mdiEyeOffOutline, mdiFileImageOutline } from '@mdi/js'
 // eslint-disable-next-line object-curly-newline
 import { required, emailValidator, passwordValidator, alphaValidator } from '@core/utils/validation'
-import { ref, getCurrentInstance } from '@vue/composition-api'
+import { ref, watch, getCurrentInstance, computed } from '@vue/composition-api'
 import axios from '@axios'
 import { useRouter } from '@core/utils'
 import themeConfig from '@themeConfig'
+import store from '../store'
 
 export default {
   setup() {
@@ -130,101 +157,65 @@ export default {
     const isPrivacyPolicyAgreed = ref(false)
     const isPasswordVisible = ref(false)
     const username = ref('@philt3r')
+    const fullName = ref('Phil')
+    const avatar = ref('')
+    const uploadedFile = ref([])
     const email = ref('philt3r@ioen.tech')
     const password = ref('32SolarPanels!')
     const errorMessages = ref([])
-    const socialLink = [
-      {
-        icon: mdiFacebook,
-        color: '#4267b2',
-        colorInDark: '#4267b2',
-      },
-      {
-        icon: mdiTwitter,
-        color: '#1da1f2',
-        colorInDark: '#1da1f2',
-      },
-      {
-        icon: mdiGithub,
-        color: '#272727',
-        colorInDark: '#fff',
-      },
-      {
-        icon: mdiGoogle,
-        color: '#db4437',
-        colorInDark: '#db4437',
-      },
-    ]
+    const isLoggedIn = computed(() => store.state.isLoggedIn)
+
+    watch(isLoggedIn, value => {
+      if (value === true) {
+        vm.$ability.update(store.state.userAbility)
+        router.push('/')
+      }
+    })
+
+    watch(uploadedFile, fileToUpload => {
+      const reader = new FileReader()
+      if (fileToUpload === null) {
+        avatar.value = ''
+
+        return
+      }
+      reader.onload = e => {
+        avatar.value = e.target.result
+      }
+      reader.readAsDataURL(fileToUpload)
+    })
 
     const handleFormSubmit = () => {
       const isFormValid = registerForm.value.validate()
 
       if (!isFormValid) return
-
-      /*
-        1. Make HTTP request to get accessToken (Register the user & login) (User will be added to the database and new generated access token will be sent for loggin in)
-        2. Store received token in localStorage for future use
-        3. Make another HTTP request for getting user information
-        4. On successful response of user information redirect to home page
-
-        ? We have use promise chaining to get user data from access token
-        ? Promise Chaining: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises#chaining
-      */
-
-      axios
-        .post('/auth/register', { username: username.value, email: email.value, password: password.value })
-        .then(response => {
-          const { accessToken } = response.data
-
-          // ? Set access token in localStorage so axios interceptor can use it
-          // Axios Interceptors: https://github.com/axios/axios#interceptors
-          localStorage.setItem('accessToken', accessToken)
-
-          return response
-        })
-        .then(() => {
-          axios.get('/auth/me').then(response => {
-            const { user } = response.data
-            const { ability: userAbility } = user
-
-            // Set user ability
-            // ? https://casl.js.org/v5/en/guide/intro#update-rules
-            vm.$ability.update(userAbility)
-
-            // ? Set user's ability in localStorage for Access Control
-            localStorage.setItem('userAbility', JSON.stringify(userAbility))
-
-            // ? We will store `userAbility` in localStorage separate from userData
-            // ? Hence, we are just removing it from user object
-            delete user.ability
-
-            // ? Set user's data in localStorage for UI/Other purpose
-            localStorage.setItem('userData', JSON.stringify(user))
-
-            // ? On success redirect to home
-            router.push('/')
-          })
-        })
-        .catch(error => {
-          // TODO: Next Update - Show notification
-          console.error('Oops, Unable to Register!')
-          console.log('error :>> ', error.response)
-          errorMessages.value = error.response.data.error
-        })
+      const agentProfile = {
+        nickname: username.value,
+        fields: {
+          avatar: avatar.value,
+          email: email.value,
+          fullName: fullName.value,
+        },
+      }
+      store.dispatch('createProfile', agentProfile)
     }
 
     return {
+      overlay: computed(() => store.state.overlay),
       isPasswordVisible,
       isPrivacyPolicyAgreed,
       username,
+      fullName,
+      avatar,
+      uploadedFile,
       email,
       password,
       errorMessages,
       handleFormSubmit,
-      socialLink,
       icons: {
         mdiEyeOutline,
         mdiEyeOffOutline,
+        mdiFileImageOutline,
       },
       validators: {
         required,

@@ -1,7 +1,12 @@
 .DS_Store
 node_modules
 /dist
-
+dist/
+.cargo
+.hc*
+*.dna
+*.happ
+.running
 
 # local env files
 .env.local

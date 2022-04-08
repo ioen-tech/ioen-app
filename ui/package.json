@@ -4,18 +4,16 @@
   "private": true,
   "description": "Production Ready, Carefully Crafted, Extensive Vuetifty Admin Template",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "holo:serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "electron:build": "vue-cli-service electron:build",
-    "ioen": "vue-cli-service electron:serve",
-    "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "ioen": "VUE_APP_HC_PORT=$HC_PORT vue-cli-service electron:serve"
   },
   "main": "background.js",
   "dependencies": {
     "@casl/ability": "^5.3.1",
     "@casl/vue": "1.x",
+    "@holochain/client": "^0.3.2",
     "@mdi/js": "^6.6.96",
     "@vue/composition-api": "^1.3.3",
     "@vuetify/cli-plugin-utils": "^0.0.9",
@@ -40,6 +38,7 @@
     "vue2-leaflet": "^2.7.1",
     "vue2-perfect-scrollbar": "^1.5.0",
     "vuetify": "^2.5.5",
+    "vuetify-image-input": "^19.2.2",
     "vuex": "^3.4.0"
   },
   "devDependencies": {

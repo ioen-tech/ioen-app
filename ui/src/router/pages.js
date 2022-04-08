@@ -195,22 +195,6 @@ const pages = [
     },
   },
   {
-    path: '/pages/supply-agreements',
-    name: 'supply-agreements',
-    component: () => import('@/views/pages/supply-agreements/Index.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
-    path: '/pages/supply-requests',
-    name: 'supply-requests',
-    component: () => import('@/views/pages/supply-requests/Index.vue'),
-    meta: {
-      layout: 'content',
-    },
-  },
-  {
     path: '/pages/faq',
     name: 'page-faq',
     component: () => import('@/views/pages/faq/Faq.vue'),

@@ -1,6 +1,7 @@
 import { canNavigate } from '@/plugins/acl/routeProtection'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 import apps from './apps'
 import dashboard from './dashboard'
 import ioen from './ioen'
@@ -15,13 +16,10 @@ const routes = [
   {
     path: '/',
     redirect: to => {
-      const userData = JSON.parse(localStorage.getItem('userData'))
-      const userRole = userData && userData.role ? userData.role : null
+      console.log('store.state.isLoggedIn path /', store.state.isLoggedIn)
+      if (store.state.isLoggedIn) return { name: 'ioen-dashboard' }
 
-      if (userRole === 'admin') return { name: 'ioen-dashboard' }
-      if (userRole === 'client') return { name: 'page-access-control' }
-
-      return { name: 'auth-login', query: to.query }
+      return { name: 'auth-register', query: to.query }
     },
   },
   {
@@ -84,13 +82,15 @@ const router = new VueRouter({
 
 // ? Router Before Each hook: https://router.vuejs.org/guide/advanced/navigation-guards.html
 router.beforeEach((to, _, next) => {
-  const userData = localStorage.getItem('userData')
+  console.log(store.state.agentProfile)
 
-  const isLoggedIn = userData && localStorage.getItem('accessToken') && localStorage.getItem('userAbility')
+  // const userData = localStorage.getItem('userData')
+
+  // const isLoggedIn = userData && localStorage.getItem('accessToken') && localStorage.getItem('userAbility')
 
   if (!canNavigate(to)) {
     // Redirect to login if not logged in
-    if (!isLoggedIn) return next({ name: 'auth-login', query: { marketplace: to.query.marketplace } })
+    if (!store.state.isLoggedIn) return next({ name: 'auth-register', query: { marketplace: to.query.marketplace } })
 
     // If logged in => not authorized
     return next({ name: 'misc-not-authorized' })
@@ -99,7 +99,7 @@ router.beforeEach((to, _, next) => {
   }
 
   // Redirect if logged in
-  if (to.meta.redirectIfLoggedIn && isLoggedIn) {
+  if (to.meta.redirectIfLoggedIn && store.state.isLoggedIn) {
     next('/')
   }
 

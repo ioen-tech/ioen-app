@@ -1,13 +1,6 @@
 <template>
-  <component
-    :is="resolveLayoutVariant"
-    :class="`skin-variant--${appSkinVariant}`"
-  >
-    <transition
-      :name="appRouteTransition"
-      mode="out-in"
-      appear
-    >
+  <component :is="resolveLayoutVariant" :class="`skin-variant--${appSkinVariant}`">
+    <transition :name="appRouteTransition" mode="out-in" appear>
       <router-view></router-view>
     </transition>
   </component>
@@ -56,6 +49,9 @@ export default {
       appSkinVariant,
       appRouteTransition,
     }
+  },
+  created() {
+    this.$store.dispatch('initialise')
   },
 }
 </script>

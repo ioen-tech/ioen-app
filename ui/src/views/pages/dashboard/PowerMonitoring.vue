@@ -205,9 +205,6 @@ export default {
       },
     }
   },
-  created() {
-    console.log(this.icons.mdiSolarPower)
-  },
 }
 </script>
 
