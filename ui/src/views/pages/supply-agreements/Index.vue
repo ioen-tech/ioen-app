@@ -2,11 +2,11 @@
   <v-card id="pricing-plan" class="text-center py-sm-15 py-5">
     <v-card-text>
       <v-row>
-        <v-col cols="12" md="6" sm="8" class="mx-auto">
+        <v-col cols="12" sm="8" class="mx-auto">
           <h1 class="font-weight-medium mb-5">Supply Agreements</h1>
           <p class="mb-3">
             These are the typical supply agreements offered in your area. Choose the plans you wish to offer or write
-            your own. Get paid in IOEN Fuel or your local kWhPriceFiat
+            your own. Get paid in IOEN Fuel or your local currency.
           </p>
 
           <!--plan switch -->

@@ -11,10 +11,10 @@ export default new Vuex.Store({
     hcClient: {},
     cellId: [],
     agentProfile: null,
-    userAbility: [
+    agentAbility: [
       {
-        action: 'manage',
-        subject: 'all',
+        action: 'read',
+        subject: 'Public',
       },
     ],
     isLoggedIn: false,
@@ -40,8 +40,13 @@ export default new Vuex.Store({
           avatar: agentProfile.profile.fields.avatar,
         }
         state.agentProfile = profile
-        state.isLoggedIn = true
       }
+    },
+    SET_AGENT_ABILITY(state, agentAbility) {
+      console.log('agentAbility', agentAbility)
+      state.agentAbility = agentAbility
+      state.isLoggedIn = true
+      console.log(state.agentAbility)
     },
   },
   actions: {
@@ -65,22 +70,12 @@ export default new Vuex.Store({
                 payload: null,
               })
               .then(agentProfile => {
-                // const agentProfile = {
-                //   id: 1,
-                //   fullName: 'John Doe',
-                //   username: 'johndoe',
-                //   password: 'admin',
-                //   avatar: require('@/assets/images/avatars/1.png'),
-                //   email: 'admin@materio.com',
-                //   role: 'admin',
-                //   ability: [
-                //     {
-                //       action: 'manage',
-                //       subject: 'all',
-                //     },
-                //   ],
-                // }
                 commit('SET_AGENT_PROFILE', agentProfile)
+                if (agentProfile !== null) {
+                  console.log(agentProfile.agentAbility)
+                  const agentAbility = JSON.parse(agentProfile.profile.fields.agentAbility)
+                  commit('SET_AGENT_ABILITY', agentAbility)
+                }
               })
           })
       })
@@ -97,6 +92,8 @@ export default new Vuex.Store({
         })
         .then(agentProfile => {
           commit('SET_AGENT_PROFILE', agentProfile)
+          const agentAbility = JSON.parse(agentProfile.profile.fields.agentAbility)
+          commit('SET_AGENT_ABILITY', agentAbility)
         })
     },
   },

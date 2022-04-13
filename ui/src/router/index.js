@@ -17,7 +17,9 @@ const routes = [
     path: '/',
     redirect: to => {
       console.log('store.state.isLoggedIn path /', store.state.isLoggedIn)
-      if (store.state.isLoggedIn) return { name: 'ioen-dashboard' }
+      if (store.state.isLoggedIn) {
+        return { name: 'ioen-dashboard' }
+      }
 
       return { name: 'auth-register', query: to.query }
     },

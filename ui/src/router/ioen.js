@@ -5,6 +5,7 @@ const pages = [
     component: () => import('@/views/pages/dashboard/Index.vue'),
     meta: {
       layout: 'content',
+      resource: 'Community',
     },
   },
   {
@@ -13,6 +14,7 @@ const pages = [
     component: () => import('@/views/pages/supply-agreements/Index.vue'),
     meta: {
       layout: 'content',
+      resource: 'Community',
     },
   },
   {
@@ -29,6 +31,7 @@ const pages = [
     component: () => import('@/views/apps/ioen-mail/Mail.vue'),
     meta: {
       layout: 'content',
+      resource: 'Community',
     },
   },
   {

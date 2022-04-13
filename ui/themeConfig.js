@@ -28,7 +28,7 @@ const themeConfig = {
     isBlurred: true,
   },
   footer: {
-    type: 'static', // fixed, static, hidden
+    type: 'hidden', // fixed, static, hidden
   },
   themes: {
     light: {
