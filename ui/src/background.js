@@ -9,11 +9,11 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { secure: tru
 
 async function createWindow() {
   const primaryDisplay = screen.getPrimaryDisplay()
-  const { height } = primaryDisplay.workAreaSize
+  const { height, width } = primaryDisplay.workAreaSize
 
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 400,
+    width,
     height,
     title: 'IOEN',
     frame: false,

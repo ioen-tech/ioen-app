@@ -18,7 +18,16 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-slider v-model="householdkWh" vertical color="info" track-color="grey" always-dirty min="0" max="14">
+                <v-slider
+                  v-model="householdkWh"
+                  :readonly="!simMonitor"
+                  vertical
+                  color="info"
+                  track-color="grey"
+                  always-dirty
+                  min="0"
+                  max="14"
+                >
                 </v-slider>
               </v-card-text>
               <v-card-actions>
@@ -37,7 +46,16 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-slider v-model="solarkWh" vertical color="solar" track-color="grey" always-dirty min="0" max="12">
+                <v-slider
+                  v-model="solarkWh"
+                  :readonly="!simMonitor"
+                  vertical
+                  color="solar"
+                  track-color="grey"
+                  always-dirty
+                  min="0"
+                  max="12"
+                >
                 </v-slider>
               </v-card-text>
               <v-card-actions>
@@ -59,6 +77,7 @@
                 <v-slider
                   v-model="batterykWh"
                   vertical
+                  :readonly="!simMonitor"
                   :color="batteryColor"
                   track-color="grey"
                   always-dirty
@@ -130,6 +149,19 @@
             </v-card>
           </v-col>
         </v-row>
+        <v-card-actions class="mt-2">
+          <v-time-picker
+            v-model="simulatorTime"
+            ampm-in-title
+            flat
+            format="24hr"
+            no-title
+            readonly
+            use-seconds
+          ></v-time-picker>
+          <v-btn @click="startSimulation"> Start </v-btn>
+          <v-btn @click="stopSimulation"> Stop </v-btn>
+        </v-card-actions>
       </v-col>
       <v-col cols="12" sm="6">
         <v-card elevation="0">
@@ -180,8 +212,24 @@ export default {
     const solarkWh = ref(5)
     const batterykWh = ref(0)
     const householdkWh = ref(5)
-    const simMonitor = ref(false)
+    const simMonitor = ref(true)
+    const simulatorTime = ref(new Date('December 1, 2000 06:00:00').toLocaleTimeString())
     const $vuetify = getVuetify()
+
+    const ioenkWh = computed(() => {
+      const ioen = solarkWh.value - batterykWh.value - householdkWh.value
+      if (ioen > -5) return ioen
+
+      return -5
+    })
+    const gridkWh = computed(() => {
+      const ioen = solarkWh.value - batterykWh.value - householdkWh.value
+      if (ioen < -5) {
+        return ioen + 5
+      }
+
+      return 0
+    })
 
     const chartOptions = {
       colors: [
@@ -260,39 +308,57 @@ export default {
       },
       {
         name: 'IOEN',
-        data: [0, 0, 0, 14000, 0, 11000, 12000],
+        data: [0, 0, 0, 14000, 0, -11000, 12000],
       },
       {
         name: 'Grid',
-        data: [0, 0, 0, 14000, 0, 11000, 12000],
+        data: [0, 0, 0, -14000, 0, -11000, -12000],
       },
     ]
 
+    let nIntervId
+    let simHour = 6
+    function logEnergyUsage() {
+      simHour += 1
+      if (simHour > 24) simHour = 0
+      simulatorTime.value = new Date(`December 1, 2000 ${simHour}:00:00`).toLocaleTimeString()
+      const energyLog = {
+        householdkWh: householdkWh.value,
+        solarkWh: solarkWh.value,
+        batterykWh: batterykWh.value,
+        ioenkWh: ioenkWh.value,
+        gridkWh: gridkWh.value,
+      }
+      console.log(energyLog)
+    }
+    function startSimulation() {
+      // check if already an interval has been set up
+      if (!nIntervId) {
+        nIntervId = setInterval(logEnergyUsage, 5000)
+      }
+    }
+
+    function stopSimulation() {
+      clearInterval(nIntervId)
+      nIntervId = null
+    }
+
     return {
       simMonitor,
+      simulatorTime,
+      startSimulation,
+      stopSimulation,
       chartOptions,
       chartData,
       solarkWh,
       batterykWh,
       householdkWh,
+      ioenkWh,
+      gridkWh,
       simSwitchLabel: computed(() => {
         if (simMonitor.value) return 'Simulator'
 
         return 'Monitor'
-      }),
-      ioenkWh: computed(() => {
-        const ioen = solarkWh.value - batterykWh.value - householdkWh.value
-        if (ioen > -5) return ioen
-
-        return -5
-      }),
-      gridkWh: computed(() => {
-        const ioen = solarkWh.value - batterykWh.value - householdkWh.value
-        if (ioen < -5) {
-          return ioen + 5
-        }
-
-        return 0
       }),
       batteryColor: computed(() => {
         if (batterykWh.value < 0) return 'battery'

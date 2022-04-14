@@ -6,14 +6,8 @@
     <v-col v-if="$can('read', 'Community')" cols="12" class="align-self-end">
       <solar-simulator></solar-simulator>
     </v-col>
-    <v-col cols="12" class="align-self-end">
-      <power-monitoring></power-monitoring>
-    </v-col>
     <v-col v-if="$can('read', 'Community')" md="6" cols="12" class="align-self-end">
-      <supplier></supplier>
-    </v-col>
-    <v-col v-if="$can('read', 'Community')" md="6" cols="12" class="align-self-end">
-      <consumer></consumer>
+      <connect-to-the-ioen></connect-to-the-ioen>
     </v-col>
     <v-col v-if="$can('read', 'Supplier')" cols="12" md="6" class="align-self-end">
       <congratulations></congratulations>
@@ -27,20 +21,20 @@
 <script>
 import TradingStatistics from './TradingStatistics.vue'
 import Welcome from './Welcome.vue'
-import Consumer from './Consumer.vue'
-import Supplier from './Supplier.vue'
+import ConnectToTheIoen from './ConnectToTheIOEN.vue'
 import SolarSimulator from '@/components/SolarSimulator.vue'
 import Congratulations from './Congratulations.vue'
-import PowerMonitoring from './PowerMonitoring.vue'
+
+// import PowerMonitoring from './PowerMonitoring.vue'
 
 export default {
   components: {
     TradingStatistics,
-    PowerMonitoring,
+
+    // PowerMonitoring,
     Congratulations,
     Welcome,
-    Consumer,
-    Supplier,
+    ConnectToTheIoen,
     SolarSimulator,
   },
   setup() {},
