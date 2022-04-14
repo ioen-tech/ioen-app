@@ -28,7 +28,6 @@ export default new Vuex.Store({
       state.cellId = payload
     },
     SET_AGENT_PROFILE(state, agentProfile) {
-      console.log(agentProfile)
       if (agentProfile === null) {
         state.overlay = false
       } else {
@@ -43,10 +42,8 @@ export default new Vuex.Store({
       }
     },
     SET_AGENT_ABILITY(state, agentAbility) {
-      console.log('agentAbility', agentAbility)
       state.agentAbility = agentAbility
       state.isLoggedIn = true
-      console.log(state.agentAbility)
     },
   },
   actions: {

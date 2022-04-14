@@ -3,11 +3,20 @@
     <v-col v-if="$can('read', 'Community')" cols="12" class="align-self-end">
       <welcome></welcome>
     </v-col>
+    <v-col v-if="$can('read', 'Community')" cols="12" class="align-self-end">
+      <solar-simulator></solar-simulator>
+    </v-col>
+    <v-col cols="12" class="align-self-end">
+      <power-monitoring></power-monitoring>
+    </v-col>
+    <v-col v-if="$can('read', 'Community')" md="6" cols="12" class="align-self-end">
+      <supplier></supplier>
+    </v-col>
+    <v-col v-if="$can('read', 'Community')" md="6" cols="12" class="align-self-end">
+      <consumer></consumer>
+    </v-col>
     <v-col v-if="$can('read', 'Supplier')" cols="12" md="6" class="align-self-end">
       <congratulations></congratulations>
-    </v-col>
-    <v-col v-if="$can('read', 'Consumer')" cols="12" md="6" class="align-self-end">
-      <power-monitoring></power-monitoring>
     </v-col>
     <v-col v-if="$can('read', 'Supplier')" cols="12" md="6" class="align-self-end">
       <trading-statistics></trading-statistics>
@@ -18,6 +27,9 @@
 <script>
 import TradingStatistics from './TradingStatistics.vue'
 import Welcome from './Welcome.vue'
+import Consumer from './Consumer.vue'
+import Supplier from './Supplier.vue'
+import SolarSimulator from '@/components/SolarSimulator.vue'
 import Congratulations from './Congratulations.vue'
 import PowerMonitoring from './PowerMonitoring.vue'
 
@@ -27,6 +39,9 @@ export default {
     PowerMonitoring,
     Congratulations,
     Welcome,
+    Consumer,
+    Supplier,
+    SolarSimulator,
   },
   setup() {},
 }

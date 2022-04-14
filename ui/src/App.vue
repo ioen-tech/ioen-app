@@ -46,7 +46,6 @@ export default {
 
     watch(isLoggedIn, value => {
       if (value === true) {
-        console.log('store.state.agentAbility', store.state.agentAbility)
         vm.$ability.update(store.state.agentAbility)
         vm.$router.push('/')
       }

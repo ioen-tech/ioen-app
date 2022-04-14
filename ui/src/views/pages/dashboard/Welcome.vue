@@ -11,6 +11,7 @@
         <v-card-text>
           <span>You have joined the</span
           ><span class="text--primary font-weight-semibold"> Internet Of ENergy Community</span>
+          <p>Use the Window menu to Toggle the window size or drag it to your preferred size.</p>
           <p>
             You can now communicate with others in the community via the
             <v-btn text to="/apps/ioen-mail">

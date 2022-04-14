@@ -1,6 +1,9 @@
 export default {
   Dashboards: 'Dashboards',
   CRM: 'CRM',
+  Dashboard: 'Dashboard',
+  'Supply Agreements': 'Supply Agreements',
+  Inbox: 'Inbox',
   Analytics: 'Analytics',
   eCommerce: 'eCommerce',
   Calendar: 'Calendar',

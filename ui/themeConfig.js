@@ -43,6 +43,10 @@ const themeConfig = {
       battery: '#fdd835',
       ioen: '#9155FD',
       grid: '#c4001d',
+      solarMax: '#9155FD',
+      solarHigh: '#56CA00',
+      solarMed: '#16B1FF',
+      solarLow: '#FF4C51',
     },
     dark: {
       primary: '#9155FD',
@@ -56,6 +60,10 @@ const themeConfig = {
       battery: '#fdd835',
       ioen: '#9155FD',
       grid: '#c4001d',
+      solarMax: '#9155FD',
+      solarHigh: '#56CA00',
+      solarMed: '#16B1FF',
+      solarLow: '#FF4C51',
     },
   },
 }
