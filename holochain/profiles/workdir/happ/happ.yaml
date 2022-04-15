@@ -1,0 +1,15 @@
+---
+manifest_version: "1"
+name: ioen-profiles
+description: ~
+roles:
+  - id: ioen_profiles
+    provisioning:
+      strategy: create
+      deferred: false
+    dna:
+      bundled: "../dna/ioen-profiles.dna"
+      properties: ~
+      uuid: ~
+      version: ~
+      clone_limit: 0

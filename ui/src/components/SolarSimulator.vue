@@ -173,13 +173,12 @@
             </div>
             <v-spacer></v-spacer>
           </v-card-title>
-
           <v-card-text class="pb-3 pt-5">
             <vue-apex-charts
               id="total-profit-chart"
               height="320"
               :options="chartOptions"
-              :series="chartData"
+              :series="logData"
             ></vue-apex-charts>
           </v-card-text>
         </v-card>
@@ -202,7 +201,7 @@ import {
   mdiHomeLightningBoltOutline,
 } from '@mdi/js'
 
-// import store from '../store'
+import store from '../store'
 
 export default {
   components: {
@@ -213,7 +212,7 @@ export default {
     const batterykWh = ref(0)
     const householdkWh = ref(5)
     const simMonitor = ref(true)
-    const simulatorTime = ref(new Date('December 1, 2000 06:00:00').toLocaleTimeString())
+    const simulatorTime = ref(new Date().toLocaleTimeString())
     const $vuetify = getVuetify()
 
     const ioenkWh = computed(() => {
@@ -235,6 +234,7 @@ export default {
       colors: [
         $vuetify.theme.currentTheme.solar,
         $vuetify.theme.currentTheme.battery,
+        $vuetify.theme.currentTheme.ioen,
         $vuetify.theme.currentTheme.ioen,
         $vuetify.theme.currentTheme.grid,
       ],
@@ -297,32 +297,194 @@ export default {
       ],
     }
 
-    const chartData = [
-      {
-        name: 'Solar',
-        data: [29000, 22000, 25000, 19000, 30000, 21000, 35000],
-      },
-      {
-        name: 'Battery',
-        data: [0, 16000, 11000, 15000, 0, 12000, 9000],
-      },
-      {
-        name: 'IOEN',
-        data: [0, 0, 0, 14000, 0, -11000, 12000],
-      },
-      {
-        name: 'Grid',
-        data: [0, 0, 0, -14000, 0, -11000, -12000],
-      },
-    ]
+    const logData = computed(() => {
+      const mondayLogs = store.state.ioen.energyLogs.filter(log => log.dayOfWeek === 'Monday')
+      const solarMonday = mondayLogs.map(item => item.solarkWh).reduce((prev, curr) => prev + curr, 0)
+      const batteryMonday =
+        mondayLogs
+          .filter(log => log.batterykWh < 0)
+          .map(item => item.batterykWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenMonday =
+        mondayLogs
+          .filter(log => log.ioenkWh < 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSupplyMonday =
+        mondayLogs
+          .filter(log => log.ioenkWh > 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const gridMonday = mondayLogs.map(item => item.gridkWh).reduce((prev, curr) => prev + curr, 0)
+
+      const tuesdayLogs = store.state.ioen.energyLogs.filter(log => log.dayOfWeek === 'Tuesday')
+      const solarTuesday = tuesdayLogs.map(item => item.solarkWh).reduce((prev, curr) => prev + curr, 0)
+      const batteryTuesday =
+        tuesdayLogs
+          .filter(log => log.batterykWh < 0)
+          .map(item => item.batterykWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenTuesday =
+        tuesdayLogs
+          .filter(log => log.ioenkWh < 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSupplyTuesday =
+        tuesdayLogs
+          .filter(log => log.ioenkWh > 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const gridTuesday = tuesdayLogs.map(item => item.gridkWh).reduce((prev, curr) => prev + curr, 0)
+
+      const wednesdayLogs = store.state.ioen.energyLogs.filter(log => log.dayOfWeek === 'Wednesday')
+      const solarWednesday = wednesdayLogs.map(item => item.solarkWh).reduce((prev, curr) => prev + curr, 0)
+      const batteryWednesday =
+        wednesdayLogs
+          .filter(log => log.batterykWh < 0)
+          .map(item => item.batterykWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenWednesday =
+        wednesdayLogs
+          .filter(log => log.ioenkWh < 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSupplyWednesday =
+        wednesdayLogs
+          .filter(log => log.ioenkWh > 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const gridWednesday = wednesdayLogs.map(item => item.gridkWh).reduce((prev, curr) => prev + curr, 0)
+
+      const thursdayLogs = store.state.ioen.energyLogs.filter(log => log.dayOfWeek === 'Thursday')
+      const solarThursday = thursdayLogs.map(item => item.solarkWh).reduce((prev, curr) => prev + curr, 0)
+      const batteryThursday =
+        thursdayLogs
+          .filter(log => log.batterykWh < 0)
+          .map(item => item.batterykWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenThursday =
+        thursdayLogs
+          .filter(log => log.ioenkWh < 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSupplyThursday =
+        thursdayLogs
+          .filter(log => log.ioenkWh > 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const gridThursday = thursdayLogs.map(item => item.gridkWh).reduce((prev, curr) => prev + curr, 0)
+
+      const fridayLogs = store.state.ioen.energyLogs.filter(log => log.dayOfWeek === 'Friday')
+      const solarFriday = fridayLogs.map(item => item.solarkWh).reduce((prev, curr) => prev + curr, 0)
+      const batteryFriday =
+        fridayLogs
+          .filter(log => log.batterykWh < 0)
+          .map(item => item.batterykWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenFriday =
+        fridayLogs
+          .filter(log => log.ioenkWh < 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSupplyFriday =
+        fridayLogs
+          .filter(log => log.ioenkWh > 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const gridFriday = fridayLogs.map(item => item.gridkWh).reduce((prev, curr) => prev + curr, 0)
+
+      const saturdayLogs = store.state.ioen.energyLogs.filter(log => log.dayOfWeek === 'Saturday')
+      const solarSaturday = saturdayLogs.map(item => item.solarkWh).reduce((prev, curr) => prev + curr, 0)
+      const batterySaturday =
+        saturdayLogs
+          .filter(log => log.batterykWh < 0)
+          .map(item => item.batterykWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSaturday =
+        saturdayLogs
+          .filter(log => log.ioenkWh < 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSupplySaturday =
+        saturdayLogs
+          .filter(log => log.ioenkWh > 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const gridSaturday = saturdayLogs.map(item => item.gridkWh).reduce((prev, curr) => prev + curr, 0)
+
+      const sundayLogs = store.state.ioen.energyLogs.filter(log => log.dayOfWeek === 'Sunday')
+      const solarSunday = sundayLogs.map(item => item.solarkWh).reduce((prev, curr) => prev + curr, 0)
+      const batterySunday =
+        sundayLogs
+          .filter(log => log.batterykWh < 0)
+          .map(item => item.batterykWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSunday =
+        sundayLogs
+          .filter(log => log.ioenkWh < 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const ioenSupplySunday =
+        sundayLogs
+          .filter(log => log.ioenkWh > 0)
+          .map(item => item.ioenkWh)
+          .reduce((prev, curr) => prev + curr, 0) * -1
+      const gridSunday = sundayLogs.map(item => item.gridkWh).reduce((prev, curr) => prev + curr, 0)
+
+      const data = [
+        {
+          name: 'Solar',
+          data: [solarSunday, solarMonday, solarTuesday, solarWednesday, solarThursday, solarFriday, solarSaturday],
+        },
+        {
+          name: 'Battery',
+          data: [
+            batterySunday,
+            batteryMonday,
+            batteryTuesday,
+            batteryWednesday,
+            batteryThursday,
+            batteryFriday,
+            batterySaturday,
+          ],
+        },
+        {
+          name: 'IOEN Consume',
+          data: [ioenSunday, ioenMonday, ioenTuesday, ioenWednesday, ioenThursday, ioenFriday, ioenSaturday],
+        },
+        {
+          name: 'IOEN Supply',
+          data: [
+            ioenSupplySunday,
+            ioenSupplyMonday,
+            ioenSupplyTuesday,
+            ioenSupplyWednesday,
+            ioenSupplyThursday,
+            ioenSupplyFriday,
+            ioenSupplySaturday,
+          ],
+        },
+        {
+          name: 'Grid',
+          data: [gridSunday, gridMonday, gridTuesday, gridWednesday, gridThursday, gridFriday, gridSaturday],
+        },
+      ]
+
+      return data
+    })
 
     let nIntervId
-    let simHour = 6
+    let simStart = 0
+    let simHours = 0
+    const options = { weekday: 'long' }
     function logEnergyUsage() {
-      simHour += 1
-      if (simHour > 24) simHour = 0
-      simulatorTime.value = new Date(`December 1, 2000 ${simHour}:00:00`).toLocaleTimeString()
+      simHours += 1
+      const simTime = new Date(simStart + simHours * 60 * 60 * 1000)
+      simulatorTime.value = new Date(simTime).toLocaleTimeString()
       const energyLog = {
+        simTime: simTime.getTime(),
+        dayOfWeek: new Intl.DateTimeFormat('en-US', options).format(simTime),
+        block: 5,
         householdkWh: householdkWh.value,
         solarkWh: solarkWh.value,
         batterykWh: batterykWh.value,
@@ -330,9 +492,10 @@ export default {
         gridkWh: gridkWh.value,
       }
       console.log(energyLog)
+      store.dispatch('ioen/storeLog', energyLog)
     }
     function startSimulation() {
-      // check if already an interval has been set up
+      simStart = new Date().getTime()
       if (!nIntervId) {
         nIntervId = setInterval(logEnergyUsage, 5000)
       }
@@ -349,12 +512,12 @@ export default {
       startSimulation,
       stopSimulation,
       chartOptions,
-      chartData,
       solarkWh,
       batterykWh,
       householdkWh,
       ioenkWh,
       gridkWh,
+      logData,
       simSwitchLabel: computed(() => {
         if (simMonitor.value) return 'Simulator'
 

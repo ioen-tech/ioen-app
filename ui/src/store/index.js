@@ -3,6 +3,7 @@ import { AppWebsocket } from '@holochain/client'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import app from './app'
+import ioen from './ioen'
 
 Vue.use(Vuex)
 
@@ -97,5 +98,6 @@ export default new Vuex.Store({
   modules: {
     appConfig: appConfigStoreModule,
     app,
+    ioen,
   },
 })

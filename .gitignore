@@ -33,3 +33,12 @@ pnpm-debug.log*
 
 #Electron-builder output
 /dist_electron
+
+#Holochain
+target/
+dist/
+.cargo
+.hc*
+*.dna
+*.happ
+.running
