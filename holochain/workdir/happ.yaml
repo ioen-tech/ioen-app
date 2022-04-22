@@ -1,10 +1,10 @@
 ---
 manifest_version: "1"
-name: energy-monitor
+name: ioen-app
 description: ~
 roles:
 
-  - id: energy_monitor
+  - id: ioen_energy_monitor
     provisioning:
       strategy: create
       deferred: false
@@ -14,7 +14,7 @@ roles:
       uuid: ~
       version: ~
       clone_limit: 0
-- id: ioen_profiles
+  - id: ioen_profiles
     provisioning:
       strategy: create
       deferred: false

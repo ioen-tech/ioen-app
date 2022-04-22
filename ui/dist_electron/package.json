@@ -4,7 +4,6 @@
   "private": true,
   "description": "Production Ready, Carefully Crafted, Extensive Vuetifty Admin Template",
   "scripts": {
-    "holo:serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "ioen": "VUE_APP_HC_PORT=$HC_PORT vue-cli-service electron:serve"

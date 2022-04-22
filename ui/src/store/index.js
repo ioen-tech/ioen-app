@@ -53,7 +53,7 @@ export default new Vuex.Store({
         commit('SET_HCCLIENT', socket)
         socket
           .appInfo({
-            installed_app_id: 'ioen-profiles',
+            installed_app_id: 'ioen-app',
           })
           .then(appInfo => {
             const cellId = appInfo.cell_data.find(data => data.role_id === 'ioen_profiles').cell_id

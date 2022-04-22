@@ -1922,7 +1922,29 @@ const data = {
           isStarred: true,
           labels: ['personal', 'private'],
           time: '2021-07-22T16:03:07',
-          replies: [],
+          replies: [
+            {
+              id: 4255040,
+              to: [{ email: 'johndoe@mail.com', name: 'me' }],
+              from: {
+                email: 'perezannette@gmail.com',
+                name: 'Kyle Christensen',
+                avatar: require('@/assets/images/avatars/7.png'),
+              },
+              subject: 'Each close probably.',
+              cc: [],
+              bcc: [],
+              message:
+                '<p>Late contain dream why ready go spring to. Against page medical wonder just fall card four. Unit live manager within feeling.\nSupport democratic lose list law. Baby address inside area or. Little individual remain sister area since thousand.</p><p>Culture effect similar clear population stuff himself quite. Trade story quality quite successful such.\nEven might his continue necessary thousand give. Record former tend determine true population reflect.</p><p>Dream when TV try loss central. Billion direction up run reduce that record. Ability then best draw.\nRich second yourself deep about foreign impact. Crime military appear shoulder bed. West job call home health woman lot.</p></br>',
+              attachments: [],
+              isStarred: true,
+              labels: ['personal'],
+              time: '2021-07-15T20:54:36',
+              replies: [],
+              folder: 'draft',
+              isRead: false,
+            },
+          ],
           folder: 'spam',
           isRead: true,
         },
@@ -2066,7 +2088,6 @@ mock.onGet('/apps/email/emails').reply(config => {
       isInFolder(email) &&
       (label ? email.labels.includes(label) : true),
   )
-  /* eslint-enable  */
 
   // ------------------------------------------------
   // Email Meta
