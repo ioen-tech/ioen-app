@@ -4,13 +4,21 @@ use hdk::prelude::*;
 #[serde(rename_all = "camelCase")]
 #[derive(Clone)]
 pub struct UsageBlock {
-    pub end_block_time: u64,
-    pub block_length: String,
-    pub household_usage: String,
-    pub solar_generated: String,
-    pub battery_charged: String,
-    pub battery_discharged: String,
-    pub ioen_supplied: String,
-    pub ioen_consumed: String,
-    pub grid_consumed: String,
+    pub t: String, // time
+    pub l: f64,    // load W
+    pub s: f64,    // solar W
+    pub b: f64,    // battery W
+    pub i: f64,    // IOEN W
+    pub g: f64,    // grid W
+}
+
+#[derive(Serialize, Deserialize, SerializedBytes, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct LogSignal {
+    pub t: String, // time
+    pub l: f64,    // load W
+    pub s: f64,    // solar W
+    pub b: f64,    // battery W
+    pub i: f64,    // IOEN W
+    pub g: f64,
 }

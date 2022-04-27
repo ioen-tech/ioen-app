@@ -1,5 +1,5 @@
 
-import { Orchestrator, Player, Cell } from "@holochain/tryorama";
+import { Cell, Orchestrator, Player } from "@holochain/tryorama";
 import { config, installation, sleep } from '../../utils';
 
 export default (orchestrator: Orchestrator<any>) =>  {
@@ -21,15 +21,12 @@ export default (orchestrator: Orchestrator<any>) =>  {
     const bob = bob_happ.cells.find(cell => cell.cellRole.includes('/energy_monitor.dna')) as Cell;
 
     const entryContents = {
-  "endBlockTime": 1650370254749,
-  "blockLength": "It's nice to play a character that has a soulful, dependent, close relationship. What do they got in there? I've crashed into a beet truck.",
-  "householdUsage": "hands faster on",
-  "solarGenerated": "chance fat part",
-  "batteryCharged": "scientists so Just",
-  "batteryDischarged": "your faster Yeah",
-  "ioenSupplied": "interesting truck It",
-  "ioenConsumed": "fat beet Must",
-  "gridConsumed": "maybe are know"
+  "t": "2022.04.26.14",
+  "l": 5,
+  "s": 5,
+  "b": 5,
+  "i": 5,
+  "g": 5
 };
 
     // Alice creates a usage_block
