@@ -1,16 +1,30 @@
 <template>
   <v-card>
     <v-row class="ma-0">
-      <v-col cols="12" sm="6" class="total-profit-chart-col">
+      <v-col
+        cols="12"
+        sm="6"
+        class="total-profit-chart-col"
+      >
         <v-card-title class="pt-2">
           Energy {{ simSwitchLabel }}
           <v-spacer></v-spacer>
-          <v-switch v-model="simMonitor" hide-details></v-switch>
+          <v-switch
+            v-model="simMonitor"
+            hide-details
+          ></v-switch>
         </v-card-title>
         <v-row no-gutters>
-          <v-col cols="1" sm="2" class="mr-3">
+          <v-col
+            cols="1"
+            sm="2"
+            class="mr-3"
+          >
             <v-card width="100">
-              <v-toolbar flat dense>
+              <v-toolbar
+                flat
+                dense
+              >
                 <v-spacer></v-spacer>
                 <v-icon color="info">
                   {{ icons.mdiHomeLightningBoltOutline }}
@@ -31,14 +45,23 @@
                 </v-slider>
               </v-card-text>
               <v-card-actions>
-                <span class="text-h5 font-weight-light" v-text="householdkWh"></span>
+                <span
+                  class="text-h5 font-weight-light"
+                  v-text="householdkWh"
+                ></span>
                 <span class="subheading font-weight-light mr-1">kWh</span>
               </v-card-actions>
             </v-card>
           </v-col>
-          <v-col cols="1" sm="2">
+          <v-col
+            cols="1"
+            sm="2"
+          >
             <v-card width="100">
-              <v-toolbar flat dense>
+              <v-toolbar
+                flat
+                dense
+              >
                 <v-spacer></v-spacer>
                 <v-icon color="solar">
                   {{ icons.mdiSolarPower }}
@@ -59,14 +82,23 @@
                 </v-slider>
               </v-card-text>
               <v-card-actions>
-                <span class="text-h5 font-weight-light" v-text="solarkWh"></span>
+                <span
+                  class="text-h5 font-weight-light"
+                  v-text="solarkWh"
+                ></span>
                 <span class="subheading font-weight-light mr-1">kWh</span>
               </v-card-actions>
             </v-card>
           </v-col>
-          <v-col cols="1" sm="2">
+          <v-col
+            cols="1"
+            sm="2"
+          >
             <v-card>
-              <v-toolbar flat dense>
+              <v-toolbar
+                flat
+                dense
+              >
                 <v-spacer></v-spacer>
                 <v-icon color="battery">
                   {{ icons.mdiBatteryChargingMedium }}
@@ -87,17 +119,33 @@
                 </v-slider>
               </v-card-text>
               <v-card-actions>
-                <span class="text-h5 font-weight-light" v-text="batterykWh"></span>
+                <span
+                  class="text-h5 font-weight-light"
+                  v-text="batterykWh"
+                ></span>
                 <span class="subheading font-weight-light mr-1">kWh</span>
               </v-card-actions>
             </v-card>
           </v-col>
-          <v-col cols="1" sm="2">
-            <v-card class="mr-3" width="100">
-              <v-toolbar flat dense>
+          <v-col
+            cols="1"
+            sm="2"
+          >
+            <v-card
+              class="mr-3"
+              width="100"
+            >
+              <v-toolbar
+                flat
+                dense
+              >
                 <v-spacer></v-spacer>
                 <v-avatar>
-                  <v-img height="20" contain :src="require('@/assets/images/svg/logo.svg')" />
+                  <v-img
+                    height="20"
+                    contain
+                    :src="require('@/assets/images/svg/logo.svg')"
+                  />
                 </v-avatar>
                 <v-spacer></v-spacer>
               </v-toolbar>
@@ -115,14 +163,23 @@
                 </v-slider>
               </v-card-text>
               <v-card-actions>
-                <span class="text-h5 font-weight-light" v-text="ioenkWh"></span>
+                <span
+                  class="text-h5 font-weight-light"
+                  v-text="ioenkWh"
+                ></span>
                 <span class="subheading font-weight-light mr-1">kWh</span>
               </v-card-actions>
             </v-card>
           </v-col>
-          <v-col cols="1" sm="2">
+          <v-col
+            cols="1"
+            sm="2"
+          >
             <v-card width="100">
-              <v-toolbar flat dense>
+              <v-toolbar
+                flat
+                dense
+              >
                 <v-spacer></v-spacer>
                 <v-icon color="grid">
                   {{ icons.mdiPowerPlugOutline }}
@@ -143,7 +200,10 @@
                 </v-slider>
               </v-card-text>
               <v-card-actions>
-                <span class="text-h5 font-weight-light" v-text="gridkWh"></span>
+                <span
+                  class="text-h5 font-weight-light"
+                  v-text="gridkWh"
+                ></span>
                 <span class="subheading font-weight-light mr-1">kWh</span><br />
               </v-card-actions>
             </v-card>
@@ -159,16 +219,25 @@
             readonly
             use-seconds
           ></v-time-picker>
-          <v-btn @click="startSimulation"> Start </v-btn>
-          <v-btn @click="stopSimulation"> Stop </v-btn>
+          <v-btn @click="startSimulation">
+            Start
+          </v-btn>
+          <v-btn @click="stopSimulation">
+            Stop
+          </v-btn>
         </v-card-actions>
       </v-col>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-card elevation="0">
           <!-- Title/Header -->
           <v-card-title class="align-start pt-0 flex-nowrap">
             <div>
-              <p class="mb-0 font-weight-bold text-2xl">420 kWh</p>
+              <p class="mb-0 font-weight-bold text-2xl">
+                420 kWh
+              </p>
               <small class="text--secondary text-xs text-no-wrap">Last week's usage 390 kWh</small>
             </div>
             <v-spacer></v-spacer>
