@@ -9,6 +9,7 @@ let hcClient = {}
 let profileCellId = []
 let energyMonitorCellId = []
 const port = process.argv[2]
+console.log('port', port)
 const profile = {
   nickname: 'picogrid',
   fields: {

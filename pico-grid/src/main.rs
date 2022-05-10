@@ -1,13 +1,14 @@
-use rust_socketio::{ClientBuilder};
+use rust_socketio::ClientBuilder;
 use serde_json::json;
 use std::{thread, time};
 
 fn main() {
-    let socket = ClientBuilder::new("http://localhost:3000")
-     .namespace("/")
-     .connect()
-     .expect("Connection failed");
     let delay = time::Duration::from_millis(1000);
+    thread::sleep(delay * 3);
+    let socket = ClientBuilder::new("http://localhost:3000")
+        .namespace("/")
+        .connect()
+        .expect("Connection failed");
     let mut count = 0u32;
     thread::sleep(delay * 3);
     loop {

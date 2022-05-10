@@ -5,7 +5,8 @@
   "author": "Philip Beadle",
   "license": "MIT",
   "scripts": {
-    "start:server": "node powerwall-logger.js $TESLA_PORT email password"
+    "start:pico-grid": "cargo run",
+    "start:server": "node index.js $PICO_PORT"
   },
   "dependencies": {
     "@holochain/client": "^0.3.2",

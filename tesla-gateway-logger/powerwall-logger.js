@@ -7,6 +7,8 @@ let hcClient = {}
 let profileCellId = []
 let energyMonitorCellId = []
 const port = process.argv[2]
+const email = process.argv[3]
+const password = process.argv[4]
 const profile = {
   nickname: 'Powerwall',
   fields: {
@@ -21,8 +23,8 @@ const https = require('https')
 let token = ''
 axios
   .post('https://192.168.0.185/api/login/Basic', {
-    email: 'philip.beadle@live.com.au',
-    password: '135kWhSolar!',
+    email,
+    password,
     username: 'customer'
   },
   {
@@ -83,41 +85,44 @@ function aggregateMeters() {
   })
 }
 
-AppWebsocket.connect(`ws://localhost:${port}`, 12000)
-.then(socket => {
-  console.log(socket)
-  hcClient = socket
-  socket
-    .appInfo({
-      installed_app_id: 'ioen-app',
-    })
-    .then(appInfo => {
-      console.log(appInfo)
-      profileCellId = appInfo.cell_data.find(data => data.role_id === 'ioen_profiles').cell_id
-      energyMonitorCellId = appInfo.cell_data.find(data => data.role_id === 'ioen_energy_monitor').cell_id
-      setInterval(aggregateMeters, 1000)
-      hcClient
-        .callZome({
-          cap: null,
-          cell_id: profileCellId,
-          zome_name: 'profiles',
-          fn_name: 'get_my_profile',
-          provenance: profileCellId[1],
-          payload: null,
-        })
-        .then(agentProfile => {
-          if (agentProfile === null) {
-            hcClient
-              .callZome({
-                cap: null,
-                cell_id: profileCellId,
-                zome_name: 'profiles',
-                fn_name: 'create_profile',
-                provenance: profileCellId[1],
-                payload: profile,
-              })
-          }
-        })
-    })
-  .catch(e => console.log(e))
-})
+function start () {
+  AppWebsocket.connect(`ws://localhost:${port}`, 12000)
+  .then(socket => {
+    console.log(socket)
+    hcClient = socket
+    socket
+      .appInfo({
+        installed_app_id: 'ioen-app',
+      })
+      .then(appInfo => {
+        console.log(appInfo)
+        profileCellId = appInfo.cell_data.find(data => data.role_id === 'ioen_profiles').cell_id
+        energyMonitorCellId = appInfo.cell_data.find(data => data.role_id === 'ioen_energy_monitor').cell_id
+        setInterval(aggregateMeters, 1000)
+        hcClient
+          .callZome({
+            cap: null,
+            cell_id: profileCellId,
+            zome_name: 'profiles',
+            fn_name: 'get_my_profile',
+            provenance: profileCellId[1],
+            payload: null,
+          })
+          .then(agentProfile => {
+            if (agentProfile === null) {
+              hcClient
+                .callZome({
+                  cap: null,
+                  cell_id: profileCellId,
+                  zome_name: 'profiles',
+                  fn_name: 'create_profile',
+                  provenance: profileCellId[1],
+                  payload: profile,
+                })
+            }
+          })
+      })
+    .catch(e => console.log(e))
+  })
+}
+setTimeout(start, 5000)

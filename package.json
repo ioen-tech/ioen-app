@@ -1,0 +1,28 @@
+{
+  "name": "ioen-tech-dna",
+  "private": true,
+  "scripts": {
+    "start:ioen-app": "cross-env HC_PORT=$(port) concurrently \"npm run playground\" \"npm run start:happ\" \"yarn --cwd ./ui ioen\"",
+    "start:picogrid": "cross-env PICO_PORT=$(port) concurrently \"npm run start:picogridhapp\" \"yarn --cwd ./pico-grid start:server\" \"yarn --cwd ./pico-grid start:pico-grid\" ",
+    "start:tesla-logger": "cross-env TESLA_PORT=$(port) concurrently \"npm run start:teslahapp\" \"yarn --cwd ./tesla-gateway-logger start:server\"",
+    "network": "concurrently-repeat \"npm run start:app\"",
+    "build:profiles": "yarn --cwd ./holochain/profiles build:dna",
+    "build:energy_monitor": "yarn --cwd ./holochain/energy_monitor build:dna",
+    "pack:happ": "npm run build:profiles && npm run build:energy_monitor && hc app pack ./holochain/workdir",
+    "start:happ": "RUST_LOG=warn hc s generate ./holochain/workdir/ioen-app.happ --run=$HC_PORT -a ioen-app network mdns",
+    "start:picogridhapp": "RUST_LOG=warn hc s generate ./holochain/workdir/ioen-app.happ --run=$PICO_PORT -a ioen-app network mdns",
+    "start:teslahapp": "RUST_LOG=warn hc s generate ./holochain/workdir/ioen-app.happ --run=$TESLA_PORT -a ioen-app network mdns",
+    "playground": "run-singleton \"holochain-playground\""
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "concurrently-repeat": "^0.0.1",
+    "cross-env": "^7.0.3",
+    "new-port-cli": "^1.0.0",
+    "run-singleton-cli": "^0.0.5"
+  },
+  "type": "module",
+  "dependencies": {
+    "@holochain-playground/cli": "^0.0.8"
+  }
+}
