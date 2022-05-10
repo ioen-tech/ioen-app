@@ -5,7 +5,6 @@ dist/
 .cargo
 .hc*
 *.dna
-*.happ
 .running
 
 # local env files
@@ -40,5 +39,4 @@ dist/
 .cargo
 .hc*
 *.dna
-*.happ
 .running
