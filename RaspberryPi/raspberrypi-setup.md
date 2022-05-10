@@ -26,3 +26,12 @@ Holochain now builds and runs on ARM devices. The following is one way to do thi
 - Install the build tools ```sudo apt install build-essential```
 - Configure ```sudo apt install pkg-config```
 - Compile Holochain ```cargo install --path crates/holochain```
+
+## Running Pico Grid
+
+- Clone the ioen-app repo ```git clone git@github.com:ioen-tech/ioen-app.git```
+  - The repo has a build of the ioen-app.happ
+- Install nvm ```curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash```
+- Install Node ```nvm install node```
+- Run ```npm install``` in the pico-grid folder.
+- In the root folder run ```npm run start:picogrid``` to run the DNA and pico grid.

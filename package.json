@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "start:ioen-app": "cross-env HC_PORT=$(port) concurrently \"npm run playground\" \"npm run start:happ\" \"yarn --cwd ./ui ioen\"",
-    "start:picogrid": "cross-env PICO_PORT=$(port) concurrently \"npm run start:picogridhapp\" \"yarn --cwd ./pico-grid start:server\" \"yarn --cwd ./pico-grid start:pico-grid\" ",
-    "start:tesla-logger": "cross-env TESLA_PORT=$(port) concurrently \"npm run start:teslahapp\" \"yarn --cwd ./tesla-gateway-logger start:server\"",
+    "start:picogrid": "cross-env PICO_PORT=$(port) concurrently \"npm run start:picogridhapp\" \"npm --prefix ./pico-grid start:server\" \"npm --prefix ./pico-grid start:pico-grid\" ",
+    "start:tesla-logger": "cross-env TESLA_PORT=$(port) concurrently \"npm run start:teslahapp\" \"npm --prefix ./tesla-gateway-logger start:server\"",
     "network": "concurrently-repeat \"npm run start:app\"",
     "build:profiles": "yarn --cwd ./holochain/profiles build:dna",
     "build:energy_monitor": "yarn --cwd ./holochain/energy_monitor build:dna",
