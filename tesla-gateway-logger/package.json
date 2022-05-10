@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Philip Beadle",
+  "license": "MIT",
+  "scripts": {
+    "picogrid": "node index.js 49354",
+    "powerwall": "node powerwall-logger.js 49354"
+  },
+  "dependencies": {
+    "@holochain/client": "^0.3.2",
+    "axios": "^0.27.0",
+    "base-64": "^1.0.0",
+    "node-fetch": "^2.6.7",
+    "socket.io": "^4.4.1"
+  }
+}

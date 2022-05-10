@@ -1,0 +1,9 @@
+[package]
+name = "picogrid"
+version = "0.1.0"
+authors = ["Philip Beadle <philip.beadle@live.com.au>"]
+edition = "2021"
+
+[dependencies]
+rust_socketio = "0.3.1"
+serde_json = "1.0"
