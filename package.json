@@ -10,7 +10,7 @@
     "build:energy_monitor": "yarn --cwd ./holochain/energy_monitor build:dna",
     "pack:happ": "npm run build:profiles && npm run build:energy_monitor && hc app pack ./holochain/workdir",
     "start:happ": "RUST_LOG=warn hc s generate ./holochain/workdir/ioen-app.happ --run=$HC_PORT -a ioen-app network mdns",
-    "start:picogridhapp": "RUST_LOG=warn hc s generate ./holochain/workdir/ioen-app.happ --run=$PICO_PORT -a ioen-app network mdns",
+    "start:picogridhapp": "RUST_LOG=warn ./RaspberryPi/hc s generate ./holochain/workdir/ioen-app.happ --run=$(port) -a ioen-app network mdns",
     "start:teslahapp": "RUST_LOG=warn hc s generate ./holochain/workdir/ioen-app.happ --run=$TESLA_PORT -a ioen-app network mdns",
     "playground": "run-singleton \"holochain-playground\""
   },
