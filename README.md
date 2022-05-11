@@ -1,5 +1,5 @@
 # IOEN App
-The IOEN App is a collection of projects for different parts of the system. The ui folder has the Electron app, the hoplochain folder is the DNA, pico-grid has the rust code for the raspberryPi solar kit and the tesla-gateway-logger folder has the node server to log the data from your Tesla Powerwall.
+The IOEN App is a collection of projects for different parts of the system. The ui folder has the Electron app, the holochain folder is the DNA, pico-grid has the rust code for the raspberryPi solar kit and the tesla-gateway-logger folder has the node server to log the data from your Tesla Powerwall.
 
 Run ```npm install``` in the root, tesla-gateway-folder and pico-grid folders. the Electron app likes yarn so run ```yarn install``` in the ui folder.
 
