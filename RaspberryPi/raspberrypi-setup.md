@@ -25,7 +25,12 @@ Holochain now builds and runs on ARM devices. The following is one way to do thi
 - Add the wasm target ```rustup target add wasm32-unknown-unknown```
 - Install the build tools ```sudo apt install build-essential```
 - Configure ```sudo apt install pkg-config```
-- Compile Holochain ```cargo install --path crates/holochain```
+- Compile Holochain 
+```
+cargo install holochain -f
+cargo install holochain_cli -f
+cargo install lair_keystore -f --version '^0.0'
+```
 
 ## Running Pico Grid
 
